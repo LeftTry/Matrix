@@ -66,14 +66,14 @@ Matrix<T> Matrix<T>::operator*(int k) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
-    if(a.n != m) throw "Matrix's width should be same as other's height";
+    if(a.m != n) throw "Matrix's width should be same as other's height";
     else{
         Matrix<T> b(n, a.m);
-        for(int i = 0;i < n;i++){
-            for(int j = 0;j < a.m;j++){
+        for(int j = 0;j < m;j++){
+            for(int i = 0;i < a.n;i++){
                 T sum = 0;
-                for(int k = 0;k < m;k++){
-                    sum += M[i][k] * a.M[k][j];
+                for(int k = 0;k < n;k++){
+                    sum += M[k][j] * a.M[i][k];
                 }
                 b.M[i][j] = sum;
             }

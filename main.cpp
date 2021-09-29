@@ -15,6 +15,7 @@ int main() {
     a = a + b;
     at = a.trans();
     c = at * b;
+    cout << at;
     cout << c;
     return 0;
 }
