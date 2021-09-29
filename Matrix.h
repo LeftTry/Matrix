@@ -85,7 +85,11 @@ Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
 
 template<typename T>
 Matrix<T> Matrix<T>::trans() {
-    return &this;
+    Matrix<T> at(n, m);
+    for(int i = 0;i < n;i++)
+        for(int j = 0;j < m;j++)
+            at.M[j][i] = M[i][j];
+    return at;
 }
 
 template<typename T>
