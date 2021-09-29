@@ -11,9 +11,10 @@ int main() {
     vector<vector<int>> v(n, vector<int> (m));
     for(int i = 0;i < n;i++) for(int j = 0;j < m;j++) cin >> v[i][j];
     Matrix<int> b(v);
-    Matrix<int> c(n, m);
+    Matrix<int> c(n, m), at(n, m);
     a = a + b;
-    c = a * b;
+    at = a.trans();
+    c = at * b;
     cout << c;
     return 0;
 }
