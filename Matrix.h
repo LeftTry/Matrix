@@ -54,12 +54,29 @@ Matrix<T> Matrix<T>::operator+(Matrix<T> &a) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(int k) {
+    for(int i = 0;i < n;i++)
+        for(int j = 0;j < m;j++)
+            M[i][j] *= k;
     return &this;
 }
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
-    return &this;
+    if(a.n != m) throw std::string "Matrix's width should be same as other's height"
+    else{
+        Matrix<T> b(n, a.m);
+        for(int i = 0;i < n;i++){
+            for(int j = 0;j < a.m;j++){
+                int sum = 0;
+                for(int k = 0;k < m;k++){
+                    sum += M[i][k] * a[k][j];
+                }
+                b.M[i][j] = sum;
+            }
+        }
+        return b;
+    }
+    return Matrix<T>(0, 0);
 }
 
 template<typename T>
