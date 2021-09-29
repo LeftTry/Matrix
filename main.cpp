@@ -1,6 +1,17 @@
 #include <iostream>
+#include "Matrix.h"
+#include <vector>
+
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    int n, m;
+    cin >> n >> m;
+    Matrix<int> a(n, m);
+    vector<vector<int>> v(n, vector<int> (m));
+    for(int i = 0;i < n;i++) for(int j = 0;j < m;j++) cin >> v[i][j];
+    Matrix<int> b(v);
+    Matrix<int> c(n, m);
+    c = a + b;
     return 0;
 }

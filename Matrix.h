@@ -26,7 +26,7 @@ template<typename T>
 Matrix<T>::Matrix(int _n, int _m) {
     n = _n;
     m = _m;
-    M.resize(n)
+    M.resize(n);
     for(int i = 0;i < n;i++) {
         M[i].resize(m);
         for (int j = 0; j < m; j++)
@@ -43,13 +43,14 @@ Matrix<T>::Matrix(std::vector<std::vector<T>> &_M) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator+(Matrix<T> &a) {
-    if(a.n != n || a.m != m) throw std::string "Matrix should be same size"
+    Matrix<T> c(n, m);
+    if(a.n != n || a.m != m) throw "Matrix should be same size";
     else{
         for(int i = 0;i < n;i++)
             for(int j = 0;j < m;j++)
-                M[i][j] += a.M[i][j];
+                c.M[i][j] = M[i][j] + a.M[i][j];
     }
-    return &this;
+    return c;
 }
 
 template<typename T>
@@ -57,17 +58,17 @@ Matrix<T> Matrix<T>::operator*(int k) {
     for(int i = 0;i < n;i++)
         for(int j = 0;j < m;j++)
             M[i][j] *= k;
-    return &this;
+    return this;
 }
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
-    if(a.n != m) throw std::string "Matrix's width should be same as other's height"
+    if(a.n != m) throw "Matrix's width should be same as other's height";
     else{
         Matrix<T> b(n, a.m);
         for(int i = 0;i < n;i++){
             for(int j = 0;j < a.m;j++){
-                int sum = 0;
+                T sum = 0;
                 for(int k = 0;k < m;k++){
                     sum += M[i][k] * a[k][j];
                 }
