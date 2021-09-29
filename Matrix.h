@@ -20,6 +20,8 @@ public:
     Matrix<T> trans();
 
     Matrix<T> pow(int);
+
+    template<class Type> friend std::ostream & operator<<(std::ostream&, const Matrix<Type>);
 };
 
 template<typename T>
@@ -55,10 +57,11 @@ Matrix<T> Matrix<T>::operator+(Matrix<T> &a) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(int k) {
+    Matrix<T> b(n, m);
     for(int i = 0;i < n;i++)
         for(int j = 0;j < m;j++)
-            M[i][j] *= k;
-    return this;
+            b.M[i][j] = M[i][j] * k;
+    return b;
 }
 
 template<typename T>
@@ -70,7 +73,7 @@ Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
             for(int j = 0;j < a.m;j++){
                 T sum = 0;
                 for(int k = 0;k < m;k++){
-                    sum += M[i][k] * a[k][j];
+                    sum += M[i][k] * a.M[k][j];
                 }
                 b.M[i][j] = sum;
             }
@@ -88,6 +91,15 @@ Matrix<T> Matrix<T>::trans() {
 template<typename T>
 Matrix<T> Matrix<T>::pow(int) {
     return &this;
+}
+
+template<class Type>
+std::ostream &operator<<(std::ostream &out, const Matrix<Type> a) {
+    for(int i = 0;i < a.n;i++){
+        for(int j = 0;j < a.m;j++) out << a.M[i][j] << " ";
+        out << std::endl;
+    }
+    return out;
 }
 
 #endif //MATRIX_MATRIX_H

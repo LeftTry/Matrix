@@ -12,6 +12,8 @@ int main() {
     for(int i = 0;i < n;i++) for(int j = 0;j < m;j++) cin >> v[i][j];
     Matrix<int> b(v);
     Matrix<int> c(n, m);
-    c = a + b;
+    a = a + b;
+    c = a * b;
+    cout << c;
     return 0;
 }
