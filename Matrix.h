@@ -93,8 +93,25 @@ Matrix<T> Matrix<T>::trans() {
 }
 
 template<typename T>
-Matrix<T> Matrix<T>::pow(int) {
-    return &this;
+Matrix<T> Matrix<T>::pow(int k) {
+    if(m != n) throw "Matrix should be square";
+    std::vector<std::vector<T>> V(n, std::vector<T>(m));
+    for(int i = 0;i  < n;i++)
+        for(int j = 0;j < m;j++){
+            if(i == j) V[i][j] = 1;
+            else V[i][j] = 0;
+        }
+    Matrix<T> a(V);
+    Matrix<T> b(M);
+    int i = 0;
+    if(k == 1) return a;
+    while(k > 0){
+        i++;
+        if(k % 2 == 1) a = a * b;
+        b = b * b;
+        k >>= 1;
+    }
+    return a;
 }
 
 template<class Type>

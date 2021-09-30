@@ -14,7 +14,7 @@ int main() {
     Matrix<int> c(n, m), at(n, m);
     a = a + b;
     at = a.trans();
-    c = at * b;
+    c = b.pow(3);
     cout << at;
     cout << c;
     return 0;
