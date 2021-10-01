@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <stdexcept>
 
 template <typename T>
 class Matrix{
@@ -46,7 +47,7 @@ Matrix<T>::Matrix(std::vector<std::vector<T>> &_M) {
 template<typename T>
 Matrix<T> Matrix<T>::operator+(Matrix<T> &a) {
     Matrix<T> c(n, m);
-    if(a.n != n || a.m != m) throw "Matrix should be same size";
+    if(a.n != n || a.m != m) throw std::string("Matrix should be same size");
     else{
         for(int i = 0;i < n;i++)
             for(int j = 0;j < m;j++)
@@ -85,7 +86,7 @@ Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
 
 template<typename T>
 Matrix<T> Matrix<T>::trans() {
-    Matrix<T> at(n, m);
+    Matrix<T> at(m, n);
     for(int i = 0;i < n;i++)
         for(int j = 0;j < m;j++)
             at.M[j][i] = M[i][j];
