@@ -9,10 +9,13 @@
 template <typename T>
 class Matrix{
     int n{}, m{};
-    std::vector<std::vector<T>> M;
+public: std::vector<std::vector<T>> M;
 public:
     Matrix(int n, int m);
     Matrix(std::vector<std::vector<T>>&);
+
+    int getn() {return n;}
+    int getm() {return m;}
 
     Matrix<T> operator+(Matrix<T>&);
     Matrix<T> operator*(int);
@@ -122,6 +125,32 @@ std::ostream &operator<<(std::ostream &out, const Matrix<Type> a) {
         out << std::endl;
     }
     return out;
+}
+
+template<typename T>
+T deter(int fn, int _n, Matrix<T>& a) {
+    //if(_n != n) _n = n;
+    //if(_n != a.getn() || a.getn() != a.getm()) throw "Matrix should be square";
+    T det = 0;
+    if(_n == 1) return a.M[0][0];
+    if(_n == 2) return (a.M[0][0] * a.M[1][1]) - (a.M[0][1] * a.M[1][0]);
+    Matrix<T> temp(fn, fn);
+    T s = 1;
+    for(int i = 0;i < _n;i++){
+        int b = 0, j = 0;
+        for(int r = 0;r < _n;r++){
+            for(int c = 0;c < _n;c++){
+                if(r != 0 && c != i){
+                    temp.M[b][j++] = a.M[r][c];
+                    if(j == _n - 1) {j = 0; b++;}
+                }
+            }
+        }
+        det += s * a.M[0][i] * deter(fn, _n - 1, temp);
+        std::cout << temp << std::endl;
+        s = -s;
+    }
+    return det;
 }
 
 #endif //MATRIX_MATRIX_H

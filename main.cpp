@@ -28,5 +28,9 @@ int main() {
     try{
         cout << "pow(b, 2):" << endl << b.pow(2) << endl;
     } catch(const char* s) {cerr << s << endl;}
+    try{
+        auto d = deter(n, n, b);
+        cout << d << endl;
+    } catch (const char* s) {cerr << s << endl;}
     return 0;
 }
