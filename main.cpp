@@ -26,7 +26,7 @@ void gauss(Matrix<double> a, vector<double> &b){
         }
     }
     //cout << a;
-    for(auto i : b){ if(!isnan(i))cout << i << " "; else cout << "Wow" << endl;}
+    for(auto i : b){ if(!isnan(i))cout << i << " "; else{ cout << "System doesn't have the solution" return 0;}}
     cout << endl;
     //return b;
 }
