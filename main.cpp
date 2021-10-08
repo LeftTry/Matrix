@@ -7,11 +7,11 @@ using namespace std;
 
 void gauss(Matrix<double> a, vector<double> &b){
     for(int i = 0;i < a.getn();i++){
+        int c = a.M[i][i];
         for(int j = 0;j < a.getn();j++){
-            a.M[i][j] /= a.M[i][i];
+            a.M[i][j] /= c;
         }
-        b[i] /= a.M[i][i];
-        cout << b[i] << endl;
+        b[i] /= c;
         for(int j = 0;j < a.getn();j++){
             int x = a.M[j][i];
             for(int k = 0;k < a.getn();k++){
@@ -25,8 +25,8 @@ void gauss(Matrix<double> a, vector<double> &b){
             //cout << b[j] << endl;
         }
     }
-    cout << a;
-    for(auto i : b) cout << i << " ";
+    //cout << a;
+    for(auto i : b){ if(!isnan(i))cout << i << " "; else cout << "Wow" << endl;}
     cout << endl;
     //return b;
 }
