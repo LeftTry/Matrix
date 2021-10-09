@@ -26,9 +26,32 @@ void gauss(Matrix<double> a, vector<double> &b){
         }
     }
     //cout << a;
-    for(auto i : b){ if(!isnan(i))cout << i << " "; else{ cout << "System doesn't have the solution" return 0;}}
+    for(auto i : b){ if(!isnan(i))cout << i << " "; else{ cout << "System doesn't have the solution" << endl; break;}}
     cout << endl;
     //return b;
+}
+
+void non_square_gauss(Matrix<double> a, vector<double> &b){
+    for(int i = 0;i < a.getn();i++){
+        //for(int j = 0;j < a.getn();j++){
+            //a.M[i][j] /= a.M[i][i];
+        //}
+        //b[i] /= a.M[i][i];
+        //cout << b[i] << endl;
+        for(int j = 0;j < a.getn();j++){
+            int x = a.M[j][i];
+            for(int k = 0;k < a.getn();k++){
+                if(j != i) {
+                    a.M[j][k] -= (x / a.M[i][i]) * a.M[i][k];
+                    //cout << a.M[j][k]<< endl;
+                }
+            }
+            if(j != i)
+                b[j] -= (x / a.M[i][i]) * b[i];
+            //cout << b[j] << endl;
+        }
+    }
+    cout << a;
 }
 
 int main() {
@@ -59,12 +82,19 @@ int main() {
         auto d = deter(n, n, b);
         cout << d << endl;
     } catch (const char* s) {cerr << s << endl;}*/
+    /*int n, m;
+    cin >> n >> m;
+    vector<vector<double>> V(n, vector<double>(m));
+    vector<double> ans(n);
+    for(int i = 0;i < n;i++){ for(int j = 0;j < m;j++) cin >> V[i][j]; cin >> ans[i];}
+    Matrix<double> b(V);
+    gauss(b, ans);*/
     int n, m;
     cin >> n >> m;
     vector<vector<double>> V(n, vector<double>(m));
     vector<double> ans(n);
     for(int i = 0;i < n;i++){ for(int j = 0;j < m;j++) cin >> V[i][j]; cin >> ans[i];}
     Matrix<double> b(V);
-    gauss(b, ans);
+    non_square_gauss(b, ans);
     return 0;
 }
