@@ -1,8 +1,11 @@
 #include <iostream>
 #include "Matrix.h"
 #include <vector>
+#include <fstream>
 
 using namespace std;
+
+ofstream fout("output.txt");
 
 void gauss(Matrix<double>& a, vector<double> &b){
     for(int i = 0;i < a.getN(); i++){
