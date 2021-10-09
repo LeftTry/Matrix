@@ -12,10 +12,10 @@ class Matrix{
 public: std::vector<std::vector<T>> M;
 public:
     Matrix(int n, int m);
-    Matrix(std::vector<std::vector<T>>&);
+    explicit Matrix(std::vector<std::vector<T>>&);
 
-    int getn() {return n;}
-    int getm() {return m;}
+    int getN() {return n;}
+    int getM() {return m;}
 
     Matrix<T> operator+(Matrix<T>&);
     Matrix<T> operator*(int);
@@ -25,7 +25,7 @@ public:
 
     Matrix<T> pow(int);
 
-    template<class Type> friend std::ostream & operator<<(std::ostream&, const Matrix<Type>);
+    template<class Type> friend std::ostream & operator<<(std::ostream&, Matrix<Type>);
 };
 
 template<typename T>
@@ -41,16 +41,16 @@ Matrix<T>::Matrix(int _n, int _m) {
 }
 
 template<typename T>
-Matrix<T>::Matrix(std::vector<std::vector<T>> &_M) {
-    M = _M;
-    n = _M.size();
-    m = _M[0].size();
+Matrix<T>::Matrix(std::vector<std::vector<T>> &M) {
+    M = M;
+    n = M.size();
+    m = M[0].size();
 }
 
 template<typename T>
 Matrix<T> Matrix<T>::operator+(Matrix<T> &a) {
     Matrix<T> c(n, m);
-    if(a.n != n || a.m != m) throw std::string("Matrix should be same size");
+    if(a.n != n || a.m != m) throw "Matrix should be same size";
     else{
         for(int i = 0;i < n;i++)
             for(int j = 0;j < m;j++)
@@ -84,7 +84,6 @@ Matrix<T> Matrix<T>::operator*(Matrix<T>& a) {
         }
         return b;
     }
-    return Matrix<T>(0, 0);
 }
 
 template<typename T>
@@ -129,8 +128,6 @@ std::ostream &operator<<(std::ostream &out, const Matrix<Type> a) {
 
 template<typename T>
 T deter(int fn, int _n, Matrix<T>& a) {
-    //if(_n != n) _n = n;
-    //if(_n != a.getn() || a.getn() != a.getm()) throw "Matrix should be square";
     T det = 0;
     if(_n == 1) return a.M[0][0];
     if(_n == 2) return (a.M[0][0] * a.M[1][1]) - (a.M[0][1] * a.M[1][0]);
