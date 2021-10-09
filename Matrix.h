@@ -12,7 +12,7 @@ class Matrix{
 public: std::vector<std::vector<T>> M;
 public:
     Matrix(int n, int m);
-    explicit Matrix(std::vector<std::vector<T>>&);
+    Matrix(std::vector<std::vector<T>>&);
 
     int getN() {return n;}
     int getM() {return m;}
