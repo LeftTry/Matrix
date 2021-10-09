@@ -40,7 +40,7 @@ void non_square_gauss(Matrix<double> a, vector<double> &b){
         //cout << b[i] << endl;
         for(int j = 0;j < a.getn();j++){
             int x = a.M[j][i];
-            for(int k = 0;k < a.getn();k++){
+            for(int k = 0;k < a.getm();k++){
                 if(j != i) {
                     a.M[j][k] -= (x / a.M[i][i]) * a.M[i][k];
                     //cout << a.M[j][k]<< endl;
@@ -52,6 +52,17 @@ void non_square_gauss(Matrix<double> a, vector<double> &b){
         }
     }
     cout << a;
+    for(int i = a.getn() - 1;i >= 0;i--){
+        //cout << "ok" << endl;
+        cout << "x" << i + 1 << " = " << b[i] / a.M[i][i] << " - ";
+        for(int k = i + 1;k < a.getm();k++){
+            if(k + 1 != a.getm())
+                cout << a.M[i][k] / a.M[i][i] << "x" << k + 1 << " - ";
+            else
+                cout << a.M[i][k] / a.M[i][i] << "x" << k + 1;
+        }
+    }
+    cout << endl;
 }
 
 int main() {
